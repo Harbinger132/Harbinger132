@@ -1,0 +1,63 @@
+https://www.vulnhub.com/entry/napping-101,752/
+
+So first writeup I've done, I'm doing this while I set it up. I've done a few others, but I am quite a noob when it comes to this kind of thing so it's all good to learn and
+I can write all my notes here for the meantime. I've done the Mr Robot and about 3/4 others on HTB (I stopped as I had alot of issues with connection and just general bugs)
+
+So start off with an arp scan, and trying to remember which one the box is as we have way too many IOT devices. Followed by the classic -sV -sC scan on nmap.
+
+So after some network fiddling to get them to work as I'm an idiot, we are left with this
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+80/tcp open  http    Apache httpd 2.4.41 ((Ubuntu))
+| http-cookie-flags: 
+|   /: 
+|     PHPSESSID: 
+|_      httponly flag not set
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+|_http-title: Login
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+
+So, I'll have a look at the HTTP page and find a straight login page. After looking at the page source we find
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body{ font: 14px sans-serif; }
+        .wrapper{ width: 360px; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h2>Login</h2>
+        <p>Please fill in your credentials to login.</p>
+
+        
+        <form action="/index.php" method="post">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control " value="">
+                <span class="invalid-feedback"></span>
+            </div>    
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control ">
+                <span class="invalid-feedback"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Login">
+            </div>
+            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+        </form>
+    </div>
+</body>
+</html>
+
+
+So possible to maybe change response with burpsuite or something?
+
+anyway continue to check stuff out, while I quickly look at metasploit search to see if any of those things I can use as a vunerability.
