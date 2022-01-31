@@ -1,0 +1,14 @@
+SO let's go apparently this one is quite easy. Although I've still got a lot to learn. This particular box is available here https://www.vulnhub.com/entry/the-planets-mercury,544/
+After this one, I'm going to give https://www.vulnhub.com/entry/the-planets-earth,755/ Earth a shot and see how it goes....
+
+
+Let's dive in, so going for the Nmap scan, I usually use -sV -sC, pretty basic options but if I feel like I'm missing more then I will define my search
+
+SO
+PORT     STATE SERVICE    VERSION                                                                                                                                                                                                          
+22/tcp   open  ssh        OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0)                                                                                                                                                     
+8080/tcp open  http-proxy WSGIServer/0.2 CPython/3.8.2            
+
+
+So went to the site, and found very little. Currently giving a dirbuster scan, and also used Niktok to see if it could find any vunerabilities. Nikto only
+found that silverstream could be used to find directories. So no help there.
